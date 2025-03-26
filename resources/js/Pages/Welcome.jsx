@@ -517,7 +517,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             </section>
 
             {/* CTA Section */}
-            <section id="contact" className="bg-[#4a0033] text-white py-16">
+            <section id="contact" className="bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-75 text-white py-16">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Create Your Next Event?</h2>
                     <p className="text-xl mb-8 max-w-2xl mx-auto">
