@@ -1,5 +1,6 @@
 import '../css/app.css';
 import './bootstrap';
+import AOS from 'aos';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -16,6 +17,11 @@ createInertiaApp({
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);
+
+        AOS.init({
+            duration: 650,
+            once: false
+        });
 
         root.render(<App {...props} />);
     },
