@@ -1,8 +1,10 @@
-import Footer from '@/Components/Footer';
-import Navbar from '@/Components/Navbar';
+import { motion } from "motion/react"
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useState } from 'react';
+import Hero from "@/Components/LandingPage/Hero";
+import AboutUs from "@/Components/LandingPage/AboutUs";
+
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
@@ -82,8 +84,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
     return (
         <GuestLayout>
+
             {/* Hero Section */}
-            <section className="relative flex lg:flex-row flex-col overflow-hidden lg:pt-0 pt-12">
+            <Hero />
+
+            {/* About Section */}
+            <AboutUs />
+
+            {/* Our Services */}
+            <section id="ourservice" className="relative flex lg:flex-row flex-col overflow-hidden lg:pt-0 pt-12">
                 {/* Enhanced gradient background with more depth */}
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-75"></div>
 
@@ -94,68 +103,89 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 }}></div>
 
                 {/* Content container with improved spacing */}
-                <div className="relative z-10 container mx-auto px-6 py-20 md:py-28 lg:py-36 flex flex-col lg:flex-row items-center justify-between">
-                    {/* Left content area with improved typography */}
-                    <div className="text-white max-w-2xl lg:max-w-3xl mb-12 lg:mb-0 ">
-
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight lg:text-start text-center">
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200">Innovative,</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200">Experiences,</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200">Memorable</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200">Events</span>
-                        </h1>
-
-                        {/* Improved CTA section with animated hover effects */}
-                        <div className="mt-12 flex lg:flex-row flex-col lg:gap-6 gap-3">
-                            <a
-                                target="_blank"
-                                href="https://www.youtube.com/watch?v=2fOrk2JUgxQ"
-                                className="group inline-flex items-center bg-white text-purple-900 px-7 py-4 rounded-full font-medium transition-all duration-300 hover:bg-purple-50 hover:shadow-lg hover:shadow-white/20 transform hover:-translate-y-1"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5 mr-3 text-purple-700 group-hover:animate-pulse"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                                Watch Video
-                            </a>
-                            <Link
-                                href="#aboutus"
-                                className="group inline-flex items-center bg-transparent border-2 border-white text-white px-7 py-4 rounded-full font-medium transition-all duration-300 hover:bg-white hover:text-purple-900 hover:shadow-lg hover:shadow-white/20 transform hover:-translate-y-1"
-                            >
-                                Learn More
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </Link>
-                        </div>
+                <div className="relative z-10 container mx-auto px-6 py-20 md:py-28 lg:py-36 flex flex-col items-center justify-between">
+                    <div className="text-center mb-16">
+                        <h2 className="text-white text-2xl md:text-3xl font-bold mb-4">Our Services</h2>
+                        <p className="text-white text-lg md:text-lg max-w-3xl mx-auto">
+                            We offer comprehensive event management solutions tailored to your specific needs
+                        </p>
                     </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {services.map((service) => (
+                            <div
+                                key={service.id}
+                                className="group relative overflow-hidden rounded-xl bg-[#2a0033] bg-opacity-40 backdrop-blur-sm border border-[#4a0033] hover:border-yellow-400 transition-all duration-300"
+                            >
 
-                    {/* Right side image with floating animation and enhanced visibility */}
-                    <div className="lg:w-2/5 relative z-10 block">
-                        <div className="relative animate-float">
-                            <div className="absolute -inset-2 bg-purple-400 bg-opacity-30 rounded-3xl blur-xl"></div>
-                            <div className="relative">
-                                <img
-                                    src="/festext.png"
-                                    alt="FES Logo"
-                                    className="max-w-full object-contain drop-shadow-2xl"
-                                />
+                                <div className="relative p-8 z-10">
+                                    <div className="w-16 h-16 bg-[#4a0033] rounded-full flex items-center justify-center mb-6 group-hover:bg-yellow-400 transition-colors duration-300">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-8 w-8 text-white group-hover:text-[#4a0033]"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            {service.icon === "music" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                                                />
+                                            )}
+                                            {service.icon === "briefcase" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                />
+                                            )}
+                                            {service.icon === "heart" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            )}
+                                            {service.icon === "users" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                                                />
+                                            )}
+                                            {service.icon === "zap" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                                />
+                                            )}
+                                            {service.icon === "award" && (
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                />
+                                            )}
+                                        </svg>
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+                                        {service.title}
+                                    </h3>
+
+                                    <p className="text-gray-300 mb-6">{service.description}</p>
+
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
@@ -164,114 +194,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 <div className="absolute -bottom-10 right-0 w-64 h-64 bg-purple-400 rounded-full filter blur-3xl opacity-20 z-2"></div>
                 <div className="absolute top-20 left-10 w-32 h-32 bg-indigo-300 rounded-full filter blur-3xl opacity-20 z-2"></div>
             </section>
-
-
-            {/* About Section */}
-            <section id="aboutus" className="py-20 md:py-32 relative overflow-hidden">
-                {/* Improved background with subtle pattern */}
-                <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 via-[#1a1a4a] to-[#0a0a2a] opacity-95"></div>
-
-                {/* Subtle geometric pattern overlay */}
-                <div className="absolute inset-0 opacity-5"
-                    style={{
-                        backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'white\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/svg%3E")',
-                        backgroundSize: '50px 50px'
-                    }}></div>
-
-                <div className="container mx-auto px-6 md:px-12 relative z-10">
-                    {/* Improved section header with accent line */}
-                    <div className="text-center mb-16">
-                        <div className="inline-block">
-                            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">ABOUT OUR COMPANY</h2>
-                            <div className="h-1 w-24 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-full mx-auto mt-2"></div>
-                        </div>
-                    </div>
-
-                    {/* Redesigned content layout with proper spacing and structure */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        {/* Left column with stacked images and visual interest */}
-                        <div className="lg:col-span-7 relative">
-                            <div className="grid grid-cols-12 gap-4">
-                                {/* Main logo with subtle glow effect */}
-                                <div className="col-span-12 md:col-span-6 relative transform -rotate-2 transition-transform duration-500 hover:rotate-0">
-                                    <div className="absolute -inset-1 rounded-lg"></div>
-                                    <div className=" p-6 rounded-lg relative">
-                                        <img
-                                            src="/festext.png"
-                                            alt="FES Logo"
-                                            className="w-full h-auto object-cover"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Secondary company image with contrasting rotation */}
-                                <div className="col-span-12 md:col-span-7 md:col-start-5 mt-8 md:-mt-6 relative z-10 transform rotate-3 transition-transform duration-500 hover:rotate-0">
-                                    <div className="absolute -inset-1 rounded-lg"></div>
-                                    <div className="p-6 rounded-lg relative">
-                                        <img
-                                            src="/about-1.png"
-                                            alt="About FES"
-                                            className="w-full h-auto object-cover rounded"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Decorative elements */}
-                            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-400 rounded-full filter blur-3xl opacity-20 z-0"></div>
-                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-300 rounded-full filter blur-3xl opacity-20 z-0"></div>
-                        </div>
-
-                        {/* Right column with improved typography and content structure */}
-                        <div className="lg:col-span-5">
-                            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl shadow-xl">
-                                <h3 className="text-2xl font-semibold mb-6 text-purple-200">Our Story Since 2020</h3>
-
-                                <div className="space-y-4 text-gray-200 leading-relaxed">
-                                    <p>
-                                        FES by Sancakra Group menyediakan layanan event organizer dan agency (EO) terbaik di Indonesia sesuai kebutuhan Anda. Sebagai perusahaan yang legal dan profesional dalam menyelenggarakan berbagai acara indoor dan outdoor sejak tahun 2020.
-                                    </p>
-
-                                    <p>
-                                        Berbagai acara seperti launching, gathering, conference, seminar, townhall, exhibition (pameran) dan roadshow dirancang khusus dan menarik. Seluruh tim FES (EO) siap memberikan konsep kegiatan sesuai kebutuhan klien dan membuka dialog/diskusi untuk bertukar ide dan konsep kegiatan yang akan diselenggarakan nantinya.
-                                    </p>
-
-                                    <div className="mt-8 border-l-4 border-purple-400 pl-4 italic">
-                                        Lebih dari <span className="text-2xl font-bold text-white">1200+</span> perusahaan dan organisasi telah mempercayakan kepada kami gathering event, launching, offline, online, hybrid event.
-                                    </div>
-
-                                    <p className="mt-4">
-                                        Sesuai dengan visi kami sebagai layanan solusi EO Indonesia yang handal dan terpadu.
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Trust indicators */}
-                    <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-                            <div className="text-3xl font-bold text-purple-300 mb-2">20+</div>
-                            <div className="text-gray-300">Partnership</div>
-                        </div>
-                        <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-                            <div className="text-3xl font-bold text-purple-300 mb-2">25.000 +</div>
-                            <div className="text-gray-300">Event Audiens</div>
-                        </div>
-                        <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-                            <div className="text-3xl font-bold text-purple-300 mb-2">50+</div>
-                            <div className="text-gray-300">Project Events</div>
-                        </div>
-                        <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg">
-                            <div className="text-3xl font-bold text-purple-300 mb-2">100+</div>
-                            <div className="text-gray-300">Team Member</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="ourservice" className="py-16 md:py-24 bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-75">
+            {/* <section id="ourservice" className="py-16 md:py-24 bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-75">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
                         <h2 className="text-white text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
@@ -358,32 +281,77 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
-            {/* Events Section */}
-            <section id="latestevent" className="bg-black text-white py-16">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Latest Events</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* latest events */}
+            <section id="latestevent" className="bg-black text-white py-20">
+                <div className="container mx-auto px-4 sm:px-6">
+                    <div className="flex flex-col items-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold relative">
+                            <span className="relative z-10">Latest Events</span>
+                            <span className="absolute -bottom-3 left-0 right-0 h-1 bg-[#ffcc00] rounded-full transform -translate-x-1"></span>
+                        </h2>
+                        <p className="text-gray-400 mt-4 max-w-2xl text-center">
+                            Join us at our upcoming events and be part of the experience
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
                         {updatedEvents.map((event) => (
-                            <div key={event.id} className="group relative overflow-hidden rounded-lg">
-                                <div className="aspect-[5/6] relative">
+                            <div
+                                key={event.id}
+                                className="group bg-gray-900 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-gray-800"
+                            >
+                                <div className="aspect-[16/9] relative overflow-hidden">
                                     <img
-                                        src={event.thumbnail}
+                                        src={event.thumbnail || "/placeholder.svg"}
                                         alt={event.title}
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                    <div className="absolute top-4 left-4 bg-[#ffcc00] text-black font-bold py-1 px-3 rounded-full text-sm">
+                                        {event.date}
+                                    </div>
                                 </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-6">
-                                    <div className="text-[#ffcc00] font-bold mb-2">{event.date}</div>
-                                    <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
-                                    <p className="text-gray-300 mb-4">{event.location}</p>
-                                    <a href={event.link} target="_blank" className="inline-flex items-center text-white hover:text-[#ffcc00]">
-                                        Learn More
+
+                                <div className="p-6">
+                                    <h3 className="text-2xl font-bold mb-3 group-hover:text-[#ffcc00] transition-colors duration-300">
+                                        {event.title}
+                                    </h3>
+                                    <div className="flex items-center mb-4 text-gray-400">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 ml-2"
+                                            className="h-5 w-5 mr-2"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                            />
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                        </svg>
+                                        <span>{event.location}</span>
+                                    </div>
+
+                                    <a
+                                        href={event.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center w-full bg-transparent hover:bg-[#ffcc00] text-[#ffcc00] hover:text-black font-bold py-3 px-4 rounded-lg border border-[#ffcc00] transition-all duration-300"
+                                    >
+                                        <span>Learn More</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
                                             viewBox="0 0 20 20"
                                             fill="currentColor"
                                         >
@@ -516,8 +484,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section id="contact" className="bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-75 text-white py-16">
+            <section id="contact" className="bg-gradient-to-br from-indigo-700 via-purple-800 to-violet-900 brightness-100 text-white py-16">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Create Your Next Event?</h2>
                     <p className="text-xl mb-8 max-w-2xl mx-auto">
