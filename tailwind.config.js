@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Bangers", "cursive"],
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },
