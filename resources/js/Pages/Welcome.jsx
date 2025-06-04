@@ -6,7 +6,9 @@ import Hero from "@/Components/LandingPage/Hero";
 import AboutUs from "@/Components/LandingPage/AboutUs";
 
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth, laravelVersion, phpVersion, jobListings }) {
+    const [modalImage, setModalImage] = useState(null);
+
 
     const services = [
         {
@@ -64,6 +66,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             link: ""
         },
     ];
+
+
     const getYoutubeThumbnail = (url) => {
         const videoId = url.split("v=")[1]?.split("&")[0]; // Ambil ID video dari URL
         return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`; // Link thumbnail
@@ -76,11 +80,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
 
     const [activeTab, setActiveTab] = useState("all")
-    const jobListings = []
-    const departments = ["all", ...new Set(jobListings.map((job) => job.department.toLowerCase()))]
 
-    const filteredJobs =
-        activeTab === "all" ? jobListings : jobListings.filter((job) => job.department.toLowerCase() === activeTab)
 
     return (
         <GuestLayout>
@@ -399,7 +399,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div> */}
 
                         {/* Department tabs */}
-                        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+                        {/* <div className="flex flex-wrap gap-2 mb-8 justify-center">
                             {departments.map((dept) => (
                                 <button
                                     key={dept}
@@ -410,50 +410,75 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     {dept.charAt(0).toUpperCase() + dept.slice(1)}
                                 </button>
                             ))}
-                        </div>
+                        </div> */}
 
                         {/* Job listings */}
                         <div className="space-y-6">
-                            {filteredJobs.length > 0 ? (
-                                filteredJobs.map((job) => (
-                                    <div
-                                        key={job.id}
-                                        className="bg-[#1a0033] bg-opacity-40 backdrop-blur-sm border border-[#4a0033] rounded-xl overflow-hidden hover:border-[#ffcc00] transition-all duration-300"
-                                    >
-                                        <div className="p-6 md:p-8">
-                                            <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                                                <div>
-                                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{job.title}</h3>
-                                                    <div className="flex flex-wrap gap-2 text-sm">
-                                                        <span className="text-[#ffcc00]">{job.department}</span>
-                                                        <span className="text-gray-400">•</span>
-                                                        <span className="text-gray-400">{job.location}</span>
-                                                        <span className="text-gray-400">•</span>
-                                                        <span className="text-gray-400">{job.type}</span>
-                                                    </div>
+                            {jobListings.length > 0 ? (
+                                <div className="space-y-6">
+                                    {jobListings.map((job) => (
+                                        <a // Each job card is a clickable link
+                                            key={job.id}
+                                            className="block bg-[#1a0033] bg-opacity-60 backdrop-blur-md border border-[#4a0033] rounded-xl overflow-hidden hover:border-[#ffcc00] transition-all duration-300 group"
+                                            aria-label={`View details for ${job.title}`}
+                                        >
+                                            <div className="flex flex-col md:flex-row">
+                                                {/* Image Column - Responsive */}
+                                                <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
+                                                    <img
+                                                        src={`/job_images/${job.image}`}
+                                                        alt={`Image for ${job.title}`}
+                                                        className="w-full h-full md:h-full object-cover transition-transform duration-300 cursor-pointer"
+                                                        onClick={() => setModalImage(`/job_images/${job.image}`)}
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = '/festext.png';
+                                                        }}
+                                                    />
                                                 </div>
-                                                <div className="mt-4 md:mt-0 text-sm text-gray-400">Posted: {job.postedDate}</div>
-                                            </div>
 
-                                            <p className="text-gray-300 mb-6">{job.description}</p>
+                                                {/* Content Column */}
+                                                <div className="p-5 md:p-6 flex-grow flex flex-col"> {/* Added flex flex-col here */}
+                                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
+                                                        <div>
+                                                            <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-[#ffcc00] transition-colors duration-300">
+                                                                {job.title}
+                                                            </h3>
+                                                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
+                                                                <span className="text-[#ffcc00] font-medium">{job.department}</span>
+                                                                <span className="text-gray-500 dark:text-gray-400">•</span>
+                                                                <span className="text-gray-400 dark:text-gray-300">{job.location}</span>
+                                                                <span className="text-gray-500 dark:text-gray-400 hidden sm:inline">•</span>
+                                                                <span className="text-gray-400 dark:text-gray-300 mt-1 sm:mt-0">{job.type}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="mt-2 sm:mt-0 text-xs sm:text-sm text-gray-500 dark:text-gray-400 self-start sm:self-center">
+                                                            Posted: {job.postedDate}
+                                                        </div>
+                                                    </div>
 
-                                            <div className="flex flex-wrap gap-3">
-                                                <Link
-                                                    href={`/careers/${job.id}`}
-                                                    className="inline-flex items-center justify-center px-6 py-2 bg-[#4a0033] text-white rounded-full hover:bg-[#ffcc00] hover:text-black transition-colors duration-300 text-sm font-medium"
-                                                >
-                                                    View Details
-                                                </Link>
-                                                <Link
-                                                    href={`/careers/${job.id}/apply`}
-                                                    className="inline-flex items-center justify-center px-6 py-2 bg-transparent border border-[#ffcc00] text-[#ffcc00] rounded-full hover:bg-[#ffcc00] hover:text-black transition-colors duration-300 text-sm font-medium"
-                                                >
-                                                    Apply Now
-                                                </Link>
+                                                    <p className="text-gray-300 dark:text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3 md:line-clamp-2 group-hover:line-clamp-none transition-all duration-200 flex-grow whitespace-pre-line">
+                                                        {job.description}
+                                                    </p>
+
+{/* 
+                                                    <div className="flex flex-wrap gap-2 mt-auto"> 
+                                                        <span
+                                                            className="inline-flex items-center justify-center px-4 py-1.5 bg-[#4a0033] text-white rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
+                                                        >
+                                                            View Details
+                                                        </span>
+                                                        <span
+                                                            className="inline-flex items-center justify-center px-4 py-1.5 bg-transparent border border-[#ffcc00] text-[#ffcc00] rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
+                                                        >
+                                                            Apply Now
+                                                        </span>
+                                                    </div> */}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                ))
+                                        </a>
+                                    ))}
+                                </div>
                             ) : (
                                 <div className="text-center py-12 bg-[#1a0033] bg-opacity-40 backdrop-blur-sm border border-[#4a0033] rounded-xl">
                                     <div className="w-16 h-16 bg-[#2a0033] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -474,11 +499,29 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </div>
                                     <h3 className="text-xl font-bold text-white mb-2">No Positions Available</h3>
                                     <p className="text-gray-400 max-w-md mx-auto">
-                                        There are currently no open positions in this department. Please check back later or explore other
-                                        departments.
+                                        There are currently no open positions. Please check back later.
                                     </p>
                                 </div>
                             )}
+
+                            {modalImage && (
+                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+                                    <div className="relative max-w-3xl w-full p-4">
+                                        <img
+                                            src={modalImage}
+                                            alt="Enlarged"
+                                            className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                                        />
+                                        <button
+                                            onClick={() => setModalImage(null)}
+                                            className="absolute top-2 right-2 text-white text-2xl font-bold"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
                         </div>
                     </div>
                 </div>

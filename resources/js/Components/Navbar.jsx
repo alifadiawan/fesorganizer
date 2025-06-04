@@ -43,6 +43,9 @@ const Navbar = () => {
                     <Link href="#contact" className="text-white hover:text-blue-300">
                         Contact
                     </Link>
+                    {/* <Link href={route('login')} className="text-white hover:text-blue-300">
+                        Login
+                    </Link> */}
                 </nav>
             </div>
         </header>

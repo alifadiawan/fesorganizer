@@ -25,9 +25,9 @@ const AboutUs = () => {
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="text-center mb-12 md:mb-16"
                 >
-                    <div class="inline-block">
-                        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-wide">ABOUT OUR COMPANY</h2>
-                        <div class="h-1 w-24 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full mx-auto mt-2">
+                    <div className="inline-block">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">ABOUT OUR COMPANY</h2>
+                        <div className="h-1 w-24 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full mx-auto mt-2">
                         </div>
                     </div>
                 </motion.div>
