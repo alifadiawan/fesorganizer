@@ -1,18 +1,30 @@
 import PrimaryButton from '@/Components/PrimaryButton';
-import GuestLayout from '@/Layouts/GuestLayout';
+import LoginLogout from '@/Layouts/LoginLogout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function VerifyEmail({ status }) {
     const { post, processing } = useForm({});
+    const [cooldown, setCooldown] = useState(20);
 
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('verification.send'));
+        if (cooldown <= 0 && !processing) {
+            post(route('verification.send'));
+            setCooldown(20);
+        }
     };
 
+    // timer 20 seconds
+    useEffect(() => {
+        if (cooldown > 0) {
+            const Timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+            return () => clearTimeout(Timer);
+        }
+    }, [cooldown]);
+
     return (
-        <GuestLayout>
+        <LoginLogout>
             <Head title="Email Verification" />
 
             <div className="mb-4 text-sm text-gray-600">
@@ -31,8 +43,10 @@ export default function VerifyEmail({ status }) {
 
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>
-                        Resend Verification Email
+                    <PrimaryButton disabled={processing || cooldown > 0}>
+                        {cooldown > 0
+                            ? `Please wait ${cooldown}s`
+                            : 'Resend Verification Email'}
                     </PrimaryButton>
 
                     <Link
@@ -45,6 +59,6 @@ export default function VerifyEmail({ status }) {
                     </Link>
                 </div>
             </form>
-        </GuestLayout>
+        </LoginLogout>
     );
 }

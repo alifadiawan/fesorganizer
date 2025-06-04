@@ -86,6 +86,13 @@ const MobileNavbar = () => {
                     >
                         Contact
                     </Link>
+                    {/* <Link
+                        href="#contact"
+                        className="text-white hover:text-blue-300 text-lg"
+                        onClick={closeMenu}
+                    >
+                        Login
+                    </Link> */}
                 </div>
             </div>
         </>

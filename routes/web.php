@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\JobListingsController;
 use App\Http\Controllers\ProfileController;
+use App\Models\JobListingsModel;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
+        'jobListings' => JobListingsModel::all(),
+
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -23,5 +27,26 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+/* 
+*=================
+* Admin Routes
+*==================
+*/
+Route::prefix('/admin')->name('admin.')->middleware(['web', 'auth'])->group(function(){
+
+    Route::get('/dashboard', function(){
+        return view('Admin.Dashboard');
+    })->name('dashboard');
+
+    // Jobs Listings Routes Admin
+    Route::resource('jobs', JobListingsController::class);
+
+});
+
+
+
+
 
 require __DIR__.'/auth.php';
