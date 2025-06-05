@@ -12,7 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     {{-- If you are using Vite, uncomment the line above and comment out the CDN script.
          Ensure your tailwind.config.js is set up correctly in your project. --}}
 
