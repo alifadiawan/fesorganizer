@@ -417,7 +417,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion, jobListings 
                             {jobListings.length > 0 ? (
                                 <div className="space-y-6">
                                     {jobListings.map((job) => (
-                                        <a // Each job card is a clickable link
+                                        <div // Each job card is a clickable link
                                             key={job.id}
                                             className="block bg-[#1a0033] bg-opacity-60 backdrop-blur-md border border-[#4a0033] rounded-xl overflow-hidden hover:border-[#ffcc00] transition-all duration-300 group"
                                             aria-label={`View details for ${job.title}`}
@@ -461,22 +461,22 @@ export default function Welcome({ auth, laravelVersion, phpVersion, jobListings 
                                                         {job.description}
                                                     </p>
 
-{/* 
+
                                                     <div className="flex flex-wrap gap-2 mt-auto"> 
-                                                        <span
+                                                        {/* <span
                                                             className="inline-flex items-center justify-center px-4 py-1.5 bg-[#4a0033] text-white rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
                                                         >
                                                             View Details
-                                                        </span>
-                                                        <span
+                                                        </span> */}
+                                                        <a target="_blank" href="https://forms.gle/akLMhRcbkDvUEFC88"
                                                             className="inline-flex items-center justify-center px-4 py-1.5 bg-transparent border border-[#ffcc00] text-[#ffcc00] rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
                                                         >
                                                             Apply Now
-                                                        </span>
-                                                    </div> */}
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
                                     ))}
                                 </div>
                             ) : (
