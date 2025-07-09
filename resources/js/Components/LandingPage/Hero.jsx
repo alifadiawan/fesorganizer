@@ -186,7 +186,7 @@ const Hero = () => {
                         >
                             <Link
                                 href="#aboutus"
-                                className="group relative inline-flex items-center justify-center bg-transparent border-2 border-white/80 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white hover:text-burgundy-900 hover:border-white overflow-hidden"
+                                className="group relative w-full inline-flex items-center justify-center bg-transparent border-2 border-white/80 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white hover:text-burgundy-900 hover:border-white overflow-hidden"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white to-red-50 opacity-0 group-hover:opacity-100"
