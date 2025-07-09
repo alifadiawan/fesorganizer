@@ -35,7 +35,7 @@
         }
         [x-cloak] { display: none !important; }
     </style>
-    @stack('styles')
+    @yield('styles')
 </head>
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
     <div class="flex h-screen overflow-hidden" x-data="{ sidebarOpen: false }">
@@ -122,6 +122,6 @@
 
     <!-- Alpine.js for simple interactivity like sidebar toggle -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    @stack('scripts')
+    @yield('scripts')
 </body>
 </html>

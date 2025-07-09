@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "aos": "^2.3.4",
+        "lucide-react": "^0.525.0",
         "motion": "^12.6.2"
     }
 }
