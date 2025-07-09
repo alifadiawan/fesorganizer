@@ -1,30 +1,188 @@
-import React, { useState } from "react";
-import {
-    Search,
-    MapPin,
-    Clock,
-    DollarSign,
-    Star,
-    ChevronRight,
-    Filter,
-    Heart,
-    Share2,
-    BookmarkPlus,
-    X,
-    Building,
-    Users,
-    Briefcase,
-} from "lucide-react";
-import GuestLayout from "@/Layouts/GuestLayout";
-import JobDetailModal from "@/Components/LandingPage/JobDetailModal";
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import Footer from "@/Components/Footer";
+import { Link } from "@inertiajs/react";
+
+// --- SVG Icons (replacing lucide-react) ---
+const Briefcase = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        <rect x="2" y="6" width="20" height="14" rx="2" />
+    </svg>
+);
+const MapPin = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+        <circle cx="12" cy="10" r="3" />
+    </svg>
+);
+const Clock = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+    </svg>
+);
+const DollarSign = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <line x1="12" x2="12" y1="2" y2="22" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+);
+const Filter = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+);
+const X = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <line x1="18" x2="6" y1="6" y2="18" />
+        <line x1="6" x2="18" y1="6" y2="18" />
+    </svg>
+);
+const Users = (props) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+);
+
+const GuestLayout = ({ children }) => <div>{children}</div>;
+
+const JobDetailModal = ({ job, onClose }) => {
+    if (!job) return null;
+
+    return (
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                className="relative bg-[#1a0033] max-w-2xl w-full p-8 rounded-2xl border border-purple-500/50 shadow-2xl max-h-screen overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white"
+                >
+                    <X />
+                </button>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                    {job.title}
+                </h2>
+                <p className="text-purple-300 mb-4">{job.company}</p>
+                <div className="space-y-3 text-gray-300 mb-6">
+                    <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4 text-purple-300" />{" "}
+                        <span>{job.location}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Clock className="w-4 h-4 text-purple-300" />{" "}
+                        <span>{job.type}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <DollarSign className="w-4 h-4 text-purple-300" />{" "}
+                        <span>{job.salary}</span>
+                    </div>
+                </div>
+                <div
+                    className="text-gray-400 whitespace-pre-line mb-6"
+                    dangerouslySetInnerHTML={{ __html: job.description }}
+                ></div>
+                <button className="w-full bg-gradient-to-r from-red-700 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105">
+                    Apply Now
+                </button>
+            </motion.div>
+        </div>
+    );
+};
 
 const Career = ({ featuredJobs }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [locationFilter, setLocationFilter] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const [likedJobs, setLikedJobs] = useState(new Set());
-    const [savedJobs, setSavedJobs] = useState(new Set());
     const [selectedJob, setSelectedJob] = useState(null);
     const [isFilterVisible, setIsFilterVisible] = useState(true);
 
@@ -37,22 +195,6 @@ const Career = ({ featuredJobs }) => {
         // { id: "artist_relations", name: "Hubungan Artis", icon: Users },
         // { id: "guest_services", name: "Layanan Tamu", icon: Users },
     ];
-
-    const toggleLike = (jobId) => {
-        setLikedJobs((prev) => {
-            const newSet = new Set(prev);
-            newSet.has(jobId) ? newSet.delete(jobId) : newSet.add(jobId);
-            return newSet;
-        });
-    };
-
-    const toggleSave = (jobId) => {
-        setSavedJobs((prev) => {
-            const newSet = new Set(prev);
-            newSet.has(jobId) ? newSet.delete(jobId) : newSet.add(jobId);
-            return newSet;
-        });
-    };
 
     const filteredJobs = featuredJobs.filter(
         (job) =>
@@ -104,75 +246,61 @@ const Career = ({ featuredJobs }) => {
     );
 
     return (
-        <div>
+        <GuestLayout>
             <div className="min-h-screen bg-gray-900 text-white [background-image:radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_rgba(255,255,255,0)_100%)]">
                 <header className="bg-black/60 backdrop-blur-md shadow-lg sticky top-0 z-40 border-b border-white/10">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between items-center py-4">
                             <div className="flex items-center space-x-4">
-                                {/* Avatar Image */}
-                                <div className="max-w-52 rounded-xl overflow-hidden">
+                                <a
+                                    href="/"
+                                    className="max-w-52 rounded-xl overflow-hidden"
+                                >
                                     <img
-                                        src="logofest1.png"
-                                        alt="FestKarir"
+                                        src="/logofest1.png"
+                                        alt="FestKarir Logo"
                                         className="w-full h-full object-cover"
                                     />
-                                </div>
+                                </a>
                             </div>
-                            {/* <nav className="hidden md:flex space-x-8">
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-white font-medium transition-colors"
-                                >
-                                    Lowongan
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-white font-medium transition-colors"
-                                >
-                                    Festival Kami
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-white font-medium transition-colors"
-                                >
-                                    Kehidupan di FestCo
-                                </a>
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:text-white font-medium transition-colors"
-                                >
-                                    Tentang Kami
-                                </a>
-                            </nav> */}
                             <div className="flex items-center space-x-4">
-                                <button className="bg-gradient-to-r from-red-700 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20">
+                                <Link
+                                    href={route("login")}
+                                    className="bg-gradient-to-r from-red-700 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20"
+                                >
                                     Masuk
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </header>
 
-                {/* Hero Section */}
                 <section className="relative py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-purple-900/50 via-black/80 to-gray-900"></div>
                     <div className="relative max-w-5xl mx-auto">
-                        <h1 className="pt-16 text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-red-300 to-purple-400 bg-clip-text text-transparent leading-tight animate-fade-in-down">
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7 }}
+                            className="pt-16 text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-red-300 to-purple-400 bg-clip-text text-transparent leading-tight"
+                        >
                             Bentuk Pengalaman Tak Terlupakan
-                        </h1>
-                        <p className="text-xl md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto animate-fade-in-up">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.2 }}
+                            className="text-xl md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto"
+                        >
                             Kami mencari individu penuh semangat untuk membantu
                             menciptakan momen magis. Petualangan Anda berikutnya
                             dimulai di sini.
-                        </p>
+                        </motion.p>
                     </div>
                 </section>
 
-                {/* Main Content */}
                 <main className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12">
-                        {/* Filters Sidebar (Desktop) */}
                         <aside
                             className={`lg:col-span-1 ${
                                 isFilterVisible ? "block" : "hidden"
@@ -181,7 +309,6 @@ const Career = ({ featuredJobs }) => {
                             <CategoryFilter />
                         </aside>
 
-                        {/* Jobs Grid */}
                         <div className="lg:col-span-3">
                             <div className="flex justify-between items-center mb-8">
                                 <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-red-300 to-purple-400 bg-clip-text text-transparent">
@@ -200,69 +327,101 @@ const Career = ({ featuredJobs }) => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {filteredJobs.map((job) => (
-                                    <div
+                                    <motion.div
                                         key={job.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5 }}
                                         onClick={() => handleJobClick(job)}
-                                        className="relative cursor-pointer bg-black/40 backdrop-blur-xl rounded-2xl border border-transparent hover:border-purple-500/50 p-6 flex flex-col transition-all duration-300 group"
+                                        className="relative cursor-pointer bg-black/40 backdrop-blur-xl rounded-2xl border border-transparent hover:border-purple-500/50 flex flex-col transition-all duration-300 group overflow-hidden"
                                         style={{
                                             background:
-                                                "radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 40%) , rgba(0,0,0,0.4)",
+                                                "radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 50%) , rgba(0,0,0,0.4)",
                                         }}
                                     >
-                                        <div className="flex-grow">
-                                            <div className="flex justify-between items-start mb-4">
-                                                <div className="flex items-center space-x-4">
-                                                    <div>
-                                                        <h3 className="font-bold text-white text-lg group-hover:text-purple-300 transition-colors">
-                                                            {job.title}
-                                                        </h3>
-                                                        <p className="text-gray-400 text-sm">
-                                                            {job.company}
-                                                        </p>
+                                        {/* Landscape Poster Section - Enforced 16:10 Aspect Ratio */}
+                                        <div className="relative w-full aspect-[16/10] bg-black/30 group-hover:opacity-90 transition-opacity duration-300">
+                                            {job.image ? (
+                                                <img
+                                                    src={`/job_images/${job.image}`}
+                                                    alt={`${job.title} Poster`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                // Placeholder with gradient and an icon
+                                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-black/50">
+                                                    <div className="text-purple-400/50">
+                                                        {/* Placeholder Icon */}
+                                                        <svg
+                                                            className="w-16 h-16"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="1"
+                                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1.586-1.586a2 2 0 00-2.828 0L6 14m6-6l.01.01"
+                                                            ></path>
+                                                        </svg>
                                                     </div>
                                                 </div>
-                                                {job.new && (
-                                                    <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 border border-purple-400/30">
-                                                        Baru
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            <div className="space-y-2 my-5 border-y border-white/10 py-3">
-                                                <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                    {" "}
-                                                    <MapPin className="w-4 h-4 text-purple-300" />{" "}
-                                                    <span>{job.location}</span>{" "}
-                                                </div>
-                                                <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                    {" "}
-                                                    <Clock className="w-4 h-4 text-purple-300" />{" "}
-                                                    <span>{job.type}</span>{" "}
-                                                </div>
-                                                <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                    {" "}
-                                                    <DollarSign className="w-4 h-4 text-purple-300" />{" "}
-                                                    <span>{job.salary}</span>{" "}
-                                                </div>
-                                            </div>
+                                            )}
+                                            {job.new && (
+                                                <span className="absolute top-3 right-3 bg-purple-500/30 text-purple-300 px-3 py-1 rounded-full text-xs font-medium border border-purple-400/40 backdrop-blur-sm">
+                                                    Baru
+                                                </span>
+                                            )}
                                         </div>
 
-                                        <div className="pt-4 flex justify-between items-center mt-auto">
-                                            <button className="bg-gradient-to-r from-red-700 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105 text-sm font-medium">
-                                                {" "}
-                                                Lamar Sekarang{" "}
-                                            </button>
+                                        {/* Content Section */}
+                                        <div className="p-6 flex-grow flex flex-col">
+                                            <div className="flex-grow">
+                                                <div className="flex justify-between items-start mb-4">
+                                                    <div className="flex items-center space-x-4">
+                                                        <div>
+                                                            <h3 className="font-bold text-white text-lg group-hover:text-purple-300 transition-colors">
+                                                                {job.title}
+                                                            </h3>
+                                                            <p className="text-gray-400 text-sm">
+                                                                {job.company}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="space-y-2 my-5 border-y border-white/10 py-3">
+                                                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                                                        {/* Assuming MapPin, Clock, DollarSign are imported components/icons */}
+                                                        {/* <MapPin className="w-4 h-4 text-purple-300" /> */}
+                                                        <span>
+                                                            {job.location}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                                                        {/* <Clock className="w-4 h-4 text-purple-300" /> */}
+                                                        <span>{job.type}</span>
+                                                    </div>
+                                                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                                                        {/* <DollarSign className="w-4 h-4 text-purple-300" /> */}
+                                                        <span>
+                                                            {job.salary}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="pt-4 flex justify-between items-center mt-auto">
+                                                <button className="bg-gradient-to-r from-red-700 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105 text-sm font-medium">
+                                                    Lamar Sekarang
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
-
-                            {/* <div className="text-center mt-16">
-                                <button className="bg-white/10 border border-white/20 text-white px-8 py-3 rounded-xl hover:bg-white/20 transition-all transform hover:scale-105 shadow-lg shadow-purple-500/10 font-medium inline-flex items-center space-x-2">
-                                    <span>Lihat Lebih Banyak</span>
-                                    <ChevronRight className="w-5 h-5" />
-                                </button>
-                            </div> */}
                         </div>
                     </div>
                 </main>
@@ -271,8 +430,10 @@ const Career = ({ featuredJobs }) => {
 
                 <JobDetailModal job={selectedJob} onClose={handleCloseModal} />
             </div>
-        </div>
+        </GuestLayout>
     );
 };
 
-export default Career;
+export default function CareerPage({ featuredJobs }) {
+    return <Career featuredJobs={featuredJobs} />;
+}

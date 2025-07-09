@@ -97,7 +97,7 @@ const AboutUs = () => {
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-400/20 rounded-2xl blur-xl transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                             <motion.img
-                                src="https://picsum.photos/seed/mainevent/800/600"
+                                src="foto-1.jpeg"
                                 alt="FES Event Highlight"
                                 className="relative w-full h-80 object-cover rounded-2xl shadow-2xl"
                                 whileHover={{ scale: 1.02, y: -5 }}
@@ -116,7 +116,7 @@ const AboutUs = () => {
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-red-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                                 <motion.img
-                                    src="https://picsum.photos/seed/teamevent/400/300"
+                                    src="about-1.png"
                                     alt="Event Management"
                                     className="relative w-full h-48 object-cover rounded-xl shadow-xl"
                                     whileHover={{ scale: 1.05 }}
@@ -133,7 +133,7 @@ const AboutUs = () => {
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-red-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                                 <motion.img
-                                    src="https://picsum.photos/seed/collaboration/400/300"
+                                    src="foto-2.jpeg"
                                     alt="Team Collaboration"
                                     className="relative w-full h-48 object-cover rounded-xl shadow-xl"
                                     whileHover={{ scale: 1.05 }}
