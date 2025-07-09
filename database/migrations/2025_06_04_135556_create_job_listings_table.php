@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('type'); 
             $table->string('status')->nullable(); 
             $table->string('salary')->nullable();
-            $table->text('description');
+            $table->mediumText('description');
             $table->text('external_link')->nullable(); // To store the external link
             $table->date('postedDate');
             $table->string('image')->nullable(); // To store the image path
