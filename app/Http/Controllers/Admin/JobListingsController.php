@@ -33,9 +33,11 @@ class JobListingsController extends Controller
             'department' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required',
+            'salary' => 'nullable',
+            'external_link' => 'nullable|string',
             'postedDate' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:6144', // Max 6MB
         ]);
 
         $data = $request->all();
@@ -78,9 +80,10 @@ class JobListingsController extends Controller
             'department' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required',
+            'salary' => 'nullable',
             'postedDate' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:6144',
         ]);
 
         $data = $request->all();

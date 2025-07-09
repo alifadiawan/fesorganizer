@@ -468,7 +468,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion, jobListings 
                                                         >
                                                             View Details
                                                         </span> */}
-                                                        <a target="_blank" href="https://forms.gle/akLMhRcbkDvUEFC88"
+                                                        <a href={route('public.careers.index')}
                                                             className="inline-flex items-center justify-center px-4 py-1.5 bg-transparent border border-[#ffcc00] text-[#ffcc00] rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
                                                         >
                                                             Apply Now

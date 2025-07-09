@@ -19,3 +19,17 @@
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
 }
+
+@theme {
+    /* Burgundy Colors */
+    --color-burgundy-100: #fdebeb;
+    --color-burgundy-200: #fad7d7;
+    /* Add more burgundy shades here if needed */
+
+    /* Maroon Colors (Dark Red Accent) */
+    --color-maroon-300: #c05b5b;
+    --color-maroon-400: #a84343;
+    --color-maroon-500: #912c2c;
+    --color-maroon-600: #7e1d1d;
+    --color-maroon-700: #6b0f0f;
+}

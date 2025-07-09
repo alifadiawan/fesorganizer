@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->string('department');
             $table->string('location');
             $table->string('type'); 
+            $table->string('salary')->nullable();
             $table->text('description');
+            $table->text('external_link')->nullable(); // To store the external link
             $table->date('postedDate');
             $table->string('image')->nullable(); // To store the image path
             $table->timestamps();
