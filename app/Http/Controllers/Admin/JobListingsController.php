@@ -35,6 +35,7 @@ class JobListingsController extends Controller
             'type' => 'required|string|max:255',
             'description' => 'required',
             'salary' => 'nullable',
+            'status' => 'nullable',
             'external_link' => 'nullable|string',
             'postedDate' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:6144', // Max 6MB
@@ -82,6 +83,7 @@ class JobListingsController extends Controller
             'type' => 'required|string|max:255',
             'description' => 'required',
             'salary' => 'nullable',
+            'status' => 'nullable',
             'postedDate' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:6144',
         ]);
