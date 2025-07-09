@@ -425,6 +425,12 @@ export default function Welcome({
                                                         </span>
                                                         <span>{job.type}</span>
                                                     </div>
+                                                    <div
+                                                        className="text-sm text-gray-300 mt-4 line-clamp-3"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: job.description,
+                                                        }}
+                                                    ></div>
                                                 </div>
                                                 <div className="mt-4 text-right">
                                                     <a

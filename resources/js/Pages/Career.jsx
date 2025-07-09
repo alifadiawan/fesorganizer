@@ -155,16 +155,20 @@ const JobDetailModal = ({ job, onClose }) => {
                 <p className="text-purple-300 mb-4">{job.company}</p>
                 <div className="space-y-3 text-gray-300 mb-6">
                     <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-purple-300" />{" "}
+                        <MapPin className="w-4 h-4 text-purple-300" />
                         <span>{job.location}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-purple-300" />{" "}
+                        <Clock className="w-4 h-4 text-purple-300" />
                         <span>{job.type}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <DollarSign className="w-4 h-4 text-purple-300" />{" "}
+                        <DollarSign className="w-4 h-4 text-purple-300" />
                         <span>{job.salary}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Briefcase className="w-4 h-4 text-purple-300" />
+                        <span>{job.status}</span>
                     </div>
                 </div>
                 <div
@@ -394,20 +398,25 @@ const Career = ({ featuredJobs }) => {
 
                                                 <div className="space-y-2 my-5 border-y border-white/10 py-3">
                                                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                        {/* Assuming MapPin, Clock, DollarSign are imported components/icons */}
-                                                        {/* <MapPin className="w-4 h-4 text-purple-300" /> */}
+                                                        <MapPin className="w-4 h-4 text-purple-300" />
                                                         <span>
                                                             {job.location}
                                                         </span>
                                                     </div>
                                                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                        {/* <Clock className="w-4 h-4 text-purple-300" /> */}
+                                                        <Clock className="w-4 h-4 text-purple-300" />
                                                         <span>{job.type}</span>
                                                     </div>
                                                     <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                                                        {/* <DollarSign className="w-4 h-4 text-purple-300" /> */}
+                                                        <DollarSign className="w-4 h-4 text-purple-300" />
                                                         <span>
                                                             {job.salary}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                                                        <Briefcase className="w-4 h-4 text-purple-300" />
+                                                        <span>
+                                                            {job.status}
                                                         </span>
                                                     </div>
                                                 </div>

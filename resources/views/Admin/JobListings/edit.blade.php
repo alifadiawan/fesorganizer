@@ -55,6 +55,17 @@
                 @enderror
             </div>
 
+            <!-- Status -->
+            <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status
+                    (e.g., Kontrak, Karyawan Tetap)</label>
+                <input type="text" name="status" id="status" value="{{ old('status', $job->status) }}" required
+                    class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
+                @error('status')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Salary -->
             <div class="mb-4">
                 <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Salary
