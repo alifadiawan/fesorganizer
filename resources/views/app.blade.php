@@ -7,7 +7,7 @@
         <title inertia>{{ config('app.name', 'FES Management') }}</title>
 
         <!-- icon -->
-        <link rel="icon" type="image/x-icon" href="festext.png">
+        <link rel="icon" type="image/x-icon" href="favicon-32x32.png">
         
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
