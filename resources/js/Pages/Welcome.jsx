@@ -146,7 +146,7 @@ export default function Welcome({
             {/* Our Services */}
             <AnimatedSection
                 id="ourservice"
-                className="relative overflow-hidden bg-gradient-to-b from-black to-[#2a0033]"
+                className="relative overflow-hidden bg-[#4f002f]"
             >
                 <div
                     className="absolute inset-0 z-1 bg-black opacity-10"
@@ -252,12 +252,12 @@ export default function Welcome({
             {/* latest events */}
             <AnimatedSection
                 id="latestevent"
-                className="bg-gradient-to-b from-[#2a0033] to-black text-white py-20 md:py-28"
+                className="bg-gradient-to-b from-[#0B0B45] to-black text-white py-20 md:py-28"
             >
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-5xl font-bold relative inline-block">
-                            <span className="relative z-10">Latest Events</span>
+                            <span className="relative z-10">Portfolio</span>
                             <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-[#ffcc00] rounded-full"></span>
                         </h2>
                         <p className="text-gray-400 mt-6 max-w-2xl text-center mx-auto text-lg">
@@ -349,7 +349,7 @@ export default function Welcome({
 
             <AnimatedSection
                 id="careers"
-                className="py-16 md:py-24 bg-gradient-to-b from-black to-[#2a0033] relative overflow-hidden"
+                className="py-16 md:py-24 bg-[#4f002f] relative overflow-hidden"
             >
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
                     <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#4a0033] rounded-full blur-[100px]"></div>
@@ -507,7 +507,7 @@ export default function Welcome({
 
             <AnimatedSection
                 id="contact"
-                className="bg-gradient-to-b from-[#2a0033] to-black text-white py-20 md:py-28"
+                className="bg-gradient-to-b from-[#4f002f] to-black text-white py-20 md:py-28"
             >
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">

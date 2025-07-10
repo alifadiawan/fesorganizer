@@ -53,9 +53,6 @@ const Hero = () => {
                     backgroundImage: 'url("/bg.jpg")',
                 }}
             >
-                {/* Multi-layered overlay for depth */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-red-900/70 to-black/90"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-purple-900/30"></div>
                 
                 {/* Animated mesh gradient overlay */}
                 <motion.div
@@ -75,6 +72,8 @@ const Hero = () => {
                     }}
                 />
             </div>
+
+             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
             {/* Floating particles */}
             {[...Array(6)].map((_, i) => (
@@ -96,7 +95,7 @@ const Hero = () => {
             ))}
 
             {/* Content container */}
-            <div className="relative z-10 container mx-auto px-6 py-20 md:py-28 lg:py-36 flex flex-col lg:flex-row items-center justify-between">
+            <div className="relative z-10 container mx-auto px-6 py-28 md:py-28 lg:py-36 flex flex-col lg:flex-row items-center justify-between">
                 {/* Left content area */}
                 <motion.div
                     variants={containerVariants}
