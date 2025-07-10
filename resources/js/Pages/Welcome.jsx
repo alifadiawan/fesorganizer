@@ -342,8 +342,8 @@ export default function Welcome({
 
                     <div className="max-w-5xl mx-auto">
                         <div className="space-y-6">
-                            {jobListings.length > 0 ? (
-                                jobListings.map((job, i) => (
+                            {jobListings.data.length > 0 ? (
+                                jobListings.data.map((job, i) => (
                                     <motion.div
                                         key={job.id}
                                         custom={i}
