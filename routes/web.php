@@ -43,14 +43,15 @@ Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->
 Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');
 Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
 
-Route::get('/portfolio', function (){
+Route::get('/portfolio', function () {
     return Inertia::render('PortofolioIndex', [
         'portfolioItems' => Portfolio::paginate(20),
     ]);
 })->name('public.portfolio.index');
-Route::get('/portfolio/{slug}', function (){
+
+Route::get('/portfolio/{slug}', function ($slug) {
     return Inertia::render('PortofolioShow', [
-        'portfolio' => Portfolio::where('slug', request()->slug)->firstOrFail(),
+        'portfolio' => Portfolio::where('slug', $slug)->firstOrFail(),
     ]);
 })->name('public.portfolio.show');
 
@@ -63,13 +64,13 @@ Route::middleware('auth')->group(function () {
 
 
 /* 
-*=================
-* Admin Routes
-*==================
-*/
-Route::prefix('/admin')->name('admin.')->middleware(['web', 'auth'])->group(function(){
+ *=================
+ * Admin Routes
+ *==================
+ */
+Route::prefix('/admin')->name('admin.')->middleware(['web', 'auth'])->group(function () {
 
-    Route::get('/dashboard', function(){
+    Route::get('/dashboard', function () {
         return view('Admin.Dashboard');
     })->name('dashboard');
 
@@ -82,4 +83,4 @@ Route::prefix('/admin')->name('admin.')->middleware(['web', 'auth'])->group(func
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
