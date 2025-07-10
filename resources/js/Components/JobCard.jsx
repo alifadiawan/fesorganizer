@@ -6,7 +6,7 @@ const JobCard = ({ job }) => {
     return (
         // Make the entire card clickable, navigating to the job details page
         <a
-            href={`/careers/${job.id}`} // Or use Link component: to={`/careers/${job.id}`}
+            href={`/career/${job.id}`} // Or use Link component: to={`/career/${job.id}`}
             className="block bg-[#1a0033] bg-opacity-60 backdrop-blur-md border border-[#4a0033] rounded-xl overflow-hidden hover:border-[#ffcc00] transition-all duration-300 group"
             aria-label={`View details for ${job.title}`}
         >
@@ -51,13 +51,13 @@ const JobCard = ({ job }) => {
                 For this example, they are visually distinct but the whole card links.
             */}
                         <span // Changed from Link to span as the parent is an <a>
-                            // href={`/careers/${job.id}`} // Redundant as parent is a link
+                            // href={`/career/${job.id}`} // Redundant as parent is a link
                             className="inline-flex items-center justify-center px-4 py-1.5 bg-[#4a0033] text-white rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
                         >
                             View Details
                         </span>
                         <span // Changed from Link to span
-                            // href={`/careers/${job.id}/apply`} // Redundant
+                            // href={`/career/${job.id}/apply`} // Redundant
                             className="inline-flex items-center justify-center px-4 py-1.5 bg-transparent border border-[#ffcc00] text-[#ffcc00] rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-colors duration-300 text-xs font-medium"
                         >
                             Apply Now

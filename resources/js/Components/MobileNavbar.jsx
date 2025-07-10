@@ -73,7 +73,7 @@ const MobileNavbar = () => {
                         Latest Event
                     </Link>
                     <Link
-                        href="#careers"
+                        href="#career"
                         className="text-white hover:text-blue-300 text-lg"
                         onClick={closeMenu}
                     >

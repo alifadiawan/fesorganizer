@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 // joblisting public
-Route::get('/careers', [JobListingController::class, 'index'])->name('public.careers.index');
+Route::get('/career', [JobListingController::class, 'index'])->name('public.career.index');
 
 
 // categories

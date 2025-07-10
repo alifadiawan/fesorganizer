@@ -36,7 +36,7 @@ const Navbar = () => {
                     <Link href="#latestevent" className="text-white hover:text-blue-300">
                         Latest Event
                     </Link>
-                    <Link href="/careers" className="text-white hover:text-blue-300">
+                    <Link href="/career" className="text-white hover:text-blue-300">
                         Career
                     </Link>
                     <Link href="#contact" className="text-white hover:text-blue-300">

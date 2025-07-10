@@ -348,7 +348,7 @@ export default function Welcome({
             </AnimatedSection>
 
             <AnimatedSection
-                id="careers"
+                id="career"
                 className="py-16 md:py-24 bg-[#4f002f] relative overflow-hidden"
             >
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
@@ -435,7 +435,7 @@ export default function Welcome({
                                                 <div className="mt-4 text-right">
                                                     <a
                                                         href={route(
-                                                            "public.careers.index"
+                                                            "public.career.index"
                                                         )}
                                                         className="inline-flex items-center justify-center px-6 py-2 bg-transparent border-2 border-[#ffcc00] text-[#ffcc00] rounded-full group-hover:bg-[#ffcc00] group-hover:text-black transition-all duration-300 text-sm font-medium transform group-hover:scale-105"
                                                     >
