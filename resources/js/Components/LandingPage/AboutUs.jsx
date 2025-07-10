@@ -142,32 +142,7 @@ const AboutUs = () => {
                             </motion.div>
                         </div>
 
-                        {/* Additional image row */}
-                        <div className="grid grid-cols-3 gap-4">
-                            {[
-                                { src: "https://picsum.photos/seed/conference/300/200", alt: "Conference Setup" },
-                                { src: "https://picsum.photos/seed/execution/300/200", alt: "Event Execution" },
-                                { src: "https://picsum.photos/seed/success/300/200", alt: "Client Success" }
-                            ].map((image, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: false, amount: 0.5 }}
-                                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 + index * 0.1 }}
-                                    className="relative group"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-red-500/10 rounded-lg blur-md transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
-                                    <motion.img
-                                        src={image.src}
-                                        alt={image.alt}
-                                        className="relative w-full h-32 object-cover rounded-lg shadow-lg"
-                                        whileHover={{ scale: 1.05 }}
-                                        transition={{ type: "spring", stiffness: 300 }}
-                                    />
-                                </motion.div>
-                            ))}
-                        </div>
+                        
                     </motion.div>
 
                     {/* Right Column - Enhanced Text Content */}

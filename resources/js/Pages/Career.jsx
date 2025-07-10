@@ -175,9 +175,9 @@ const JobDetailModal = ({ job, onClose }) => {
                     className="text-gray-400 mb-6"
                     dangerouslySetInnerHTML={{ __html: job.description }}
                 ></div>
-                <button className="w-full bg-gradient-to-r from-red-700 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105">
-                    Apply Now
-                </button>
+                <a href={'#' && job.external_link} className="w-full bg-gradient-to-r from-red-700 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-red-600 hover:to-purple-500 transition-all transform hover:scale-105">
+                    Daftar Sekarang
+                </a>
             </motion.div>
         </div>
     );

@@ -84,6 +84,7 @@ class JobListingsController extends Controller
             'description' => 'required',
             'salary' => 'nullable',
             'status' => 'nullable',
+            'external_link' => 'nullable|string',
             'postedDate' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:6144',
         ]);
