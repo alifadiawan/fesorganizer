@@ -55,6 +55,18 @@
                 @enderror
             </div>
 
+            <!-- External Links -->
+            <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">External Link
+                    (Optional) <span class="text-xs text-gray-500 dark:text-gray-400">(e.g., company website, job portal)</span>
+                </label>
+                <input type="text" name="external_link" id="external_link" value="{{ old('external_link', $job->external_link) }}"
+                    class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
+                @error('type')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Status -->
             <div class="mb-4">
                 <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status
@@ -70,7 +82,7 @@
             <div class="mb-4">
                 <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Salary
                 </label>
-                <input type="text" name="salary" id="salary" value="{{ old($job->salary) }}"
+                <input type="text" name="salary" id="salary"value="{{ old('salary', $job->salary) }}"
                     class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
                 @error('type')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -105,11 +117,11 @@
                 <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Job Image
                     (Optional)</label>
                 <input type="file" name="image" id="image" class="mt-1 block w-full text-sm text-gray-500 dark:text-gray-300
-                                  file:mr-4 file:py-2 file:px-4
-                                  file:rounded-full file:border-0
-                                  file:text-sm file:font-semibold
-                                  file:bg-indigo-50 dark:file:bg-indigo-800 file:text-indigo-700 dark:file:text-indigo-300
-                                  hover:file:bg-indigo-100 dark:hover:file:bg-indigo-700">
+                                      file:mr-4 file:py-2 file:px-4
+                                      file:rounded-full file:border-0
+                                      file:text-sm file:font-semibold
+                                      file:bg-indigo-50 dark:file:bg-indigo-800 file:text-indigo-700 dark:file:text-indigo-300
+                                      hover:file:bg-indigo-100 dark:hover:file:bg-indigo-700">
                 @error('image')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
