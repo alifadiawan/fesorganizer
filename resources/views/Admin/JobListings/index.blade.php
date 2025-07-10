@@ -3,43 +3,42 @@
 
 @section('content')
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200">All Job Listings</h2>
         <a href="{{ route('admin.jobs.create') }}"
-            class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-indigo">
+            class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 font-medium transition">
             Add New Job
         </a>
     </div>
 
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-hidden rounded-xl shadow bg-white">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Title</th>
-                        <th class="px-4 py-3">Department</th>
-                        <th class="px-4 py-3">Location</th>
-                        <th class="px-4 py-3">Type</th>
-                        <th class="px-4 py-3">Posted Date</th>
-                        <th class="px-4 py-3">Actions</th>
+                        class="text-xs font-semibold tracking-wide text-left text-slate-500 uppercase border-b border-slate-200 bg-slate-100">
+                        <th class="px-6 py-3">Title</th>
+                        <th class="px-6 py-3">Department</th>
+                        <th class="px-6 py-3">Location</th>
+                        <th class="px-6 py-3">Type</th>
+                        <th class="px-6 py-3">Posted Date</th>
+                        <th class="px-6 py-3">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                <tbody class="bg-white divide-y divide-slate-200">
                     @forelse ($jobs as $job)
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
+                        <tr class="text-slate-700">
+                            <td class="px-6 py-4">
                                 <div class="flex items-center text-sm">
                                     @if ($job->image)
-                                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                                        <div class="relative hidden w-10 h-10 mr-3 rounded-full md:block">
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{  asset('job_images/' . $job->image) }}"
+                                                src="{{ asset('job_images/' . $job->image) }}"
                                                 alt="{{ $job->title }}" loading="lazy" />
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
                                         </div>
                                     @else
                                         <div
-                                            class="relative hidden w-8 h-8 mr-3 rounded-full md:block bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-300">
+                                            class="relative hidden w-10 h-10 mr-3 rounded-full md:block bg-slate-200 flex items-center justify-center text-slate-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path fill-rule="evenodd"
@@ -49,38 +48,27 @@
                                         </div>
                                     @endif
                                     <div>
-                                        <p class="font-semibold">{{ $job->title }}</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                        <p class="font-semibold text-slate-800">{{ $job->title }}</p>
+                                        <p class="text-xs text-slate-500">
                                             {{ Str::limit($job->description, 30) }}
                                         </p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-3 text-sm">{{ $job->department }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $job->location }}</td>
-                            <td class="px-4 py-3 text-xs">
+                            <td class="px-6 py-4 text-sm">{{ $job->department }}</td>
+                            <td class="px-6 py-4 text-sm">{{ $job->location }}</td>
+                            <td class="px-6 py-4 text-xs">
                                 <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                    class="px-2 py-1 font-semibold leading-tight text-indigo-700 bg-indigo-100 rounded-full">
                                     {{ $job->type }}
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-sm">{{ \Carbon\Carbon::parse($job->postedDate)->format('M d, Y') }}
+                            <td class="px-6 py-4 text-sm">{{ \Carbon\Carbon::parse($job->postedDate)->format('M d, Y') }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="flex items-center space-x-2">
-                                    <a href="{{ route('admin.jobs.show', $job->id) }}"
-                                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200"
-                                        title="View">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            <path fill-rule="evenodd"
-                                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
+                            <td class="px-6 py-4 text-sm">
+                                <div class="flex items-center space-x-4">
                                     <a href="{{ route('admin.jobs.edit', $job->id) }}"
-                                        class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-200"
+                                        class="text-slate-500 hover:text-yellow-600"
                                         title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                             fill="currentColor">
@@ -97,7 +85,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200"
+                                            class="text-slate-500 hover:text-red-600"
                                             title="Delete">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -112,7 +100,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-10 text-center text-gray-500 dark:text-gray-400">
+                            <td colspan="6" class="px-6 py-10 text-center text-slate-500">
                                 No job listings found.
                             </td>
                         </tr>
@@ -121,7 +109,7 @@
             </table>
         </div>
         <div
-            class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+            class="px-6 py-4 border-t border-slate-200 bg-slate-50">
             {{ $jobs->links() }}
         </div>
     </div>

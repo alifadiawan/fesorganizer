@@ -2,16 +2,19 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\JobListingsController;
+use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\JobListingController;
 use App\Models\JobListingsModel;
+use App\Models\Portfolio;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'jobListings' => JobListingsModel::all(),
+        'jobListings' => JobListingsModel::paginate(5),
+        'events' => Portfolio::paginate(5),
 
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -32,10 +35,25 @@ Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('
 Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
+// portfolio
+Route::get('/admin/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/admin/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.create');
+Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
+Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit');
+Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('portfolio.update');
+Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/portfolio', function (){
+    return Inertia::render('PortofolioIndex', [
+        'portfolioItems' => Portfolio::paginate(20),
+    ]);
+})->name('public.portfolio.index');
+Route::get('/portfolio/{slug}', function (){
+    return Inertia::render('PortofolioShow', [
+        'portfolio' => Portfolio::where('slug', request()->slug)->firstOrFail(),
+    ]);
+})->name('public.portfolio.show');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
