@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import Hero from "@/Components/LandingPage/Hero";
 import AboutUs from "@/Components/LandingPage/AboutUs";
@@ -47,9 +47,9 @@ export default function Welcome({
     laravelVersion,
     phpVersion,
     jobListings,
+    events
 }) {
     const [modalImage, setModalImage] = useState(null);
-
     const services = [
         {
             id: 1,
@@ -81,45 +81,21 @@ export default function Welcome({
         },
     ];
 
-    const events = [
-        {
-            id: 1,
-            date: "Feb 25, 2023",
-            title: "Future Entrepreneur Summit Surabaya 2024",
-            location: "Airlangga Convention Center, Surabaya",
-            youtube: "https://www.youtube.com/watch?v=begb0t8qaa4",
-            link: "https://www.instagram.com/p/DGF_Y7XvDAK/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-        },
-        {
-            id: 2,
-            date: "Feb 24, 2023",
-            title: "Future Entrepreneur Summit Malang 2024",
-            location: "Dome Universitas Muhammadiyah Malang",
-            youtube: "https://www.youtube.com/watch?v=3FibI1YoNVE&t=8s",
-            link: "",
-        },
-        {
-            id: 3,
-            date: "Des 14, 2024",
-            title: "Future Entrepreneur Summit Semarang 2024",
-            location: "Auditorium Prof. Wuryanto UNNES",
-            youtube: "https://www.youtube.com/watch?v=P-vcDLaMG9M",
-            link: "",
-        },
-    ];
-
-    const getYoutubeThumbnail = (url) => {
-        if (!url) return null;
-        const videoId = url.split("v=")[1]?.split("&")[0];
-        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    };
-
-    const updatedEvents = events.map((event) => ({
-        ...event,
-        thumbnail: getYoutubeThumbnail(event.youtube),
-    }));
-
     const [activeTab, setActiveTab] = useState("all");
+    const { url } = usePage();
+
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash) {
+            const target = document.querySelector(hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 100); // sedikit delay biar element udah render
+            }
+        }
+    }, [url]);
+
 
     // Card animation variants
     const cardVariants = {
@@ -266,8 +242,8 @@ export default function Welcome({
                         </p>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-                        {updatedEvents.map((event, i) => (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 mb-12">
+                        {events.data.map((event, i) => (
                             <motion.div
                                 key={event.id}
                                 custom={i}
@@ -279,16 +255,14 @@ export default function Welcome({
                                 <div className="aspect-[16/9] relative overflow-hidden">
                                     <img
                                         src={
-                                            event.thumbnail ||
-                                            "https://placehold.co/600x400/000000/FFFFFF?text=Event"
+                                            event.thumbnail
+                                                ? `/storage/${event.thumbnail}`
+                                                : "https://placehold.co/600x400/000000/FFFFFF?text=FESt"
                                         }
                                         alt={event.title}
                                         className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300"></div>
-                                    <div className="absolute top-4 left-4 bg-[#ffcc00] text-black font-bold py-1 px-3 rounded-full text-sm">
-                                        {event.date}
-                                    </div>
                                 </div>
 
                                 <div className="p-6 flex flex-col h-full">
@@ -315,35 +289,33 @@ export default function Welcome({
                                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                             />
                                         </svg>
-                                        <span>{event.location}</span>
+                                        <span>{event.location || 'Indonesia'}</span>
                                     </div>
 
-                                    <div className="flex justify-center mt-auto">
-                                        <a
-                                            href={event.link || "#"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center bg-transparent hover:bg-[#ffcc00] text-[#ffcc00] hover:text-black font-bold py-3 px-6 rounded-lg border-2 border-[#ffcc00] transition-all duration-300 transform group-hover:scale-105"
-                                        >
-                                            <span>Learn More</span>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
+                                    <div className="flex flex-col ">
+                                        <div className="flex justify-center mt-auto z-10">
+                                            <Link
+                                                href={route('public.portfolio.show', event.slug) || '#'}
+                                                className="inline-flex w-full items-center justify-center bg-transparent hover:bg-[#ffcc00] text-[#ffcc00] hover:text-black font-bold py-3 px-6 rounded-lg border-2 border-[#ffcc00] transition-all duration-300 transform hover:scale-105"
                                             >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </a>
+                                                <span>Learn More</span>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
+
+                    <div className="w-full flex justify-center">
+                        <Link
+                            href={route('public.portfolio.index')}
+                            className="p-4 border text-center border-yellow-400 rounded-lg hover:bg-yellow-500 hover:text-black text-white transition-all"
+                        >
+                            See more
+                        </Link>
+                    </div>
+
                 </div>
             </AnimatedSection>
 
