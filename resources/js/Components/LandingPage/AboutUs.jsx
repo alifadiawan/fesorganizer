@@ -4,18 +4,18 @@ import { motion } from "framer-motion"
 const AboutUs = () => {
     return (
         <section className="py-16 md:py-32 relative overflow-hidden" id="aboutus">
-            {/* Enhanced Background Gradient with Burgundy Theme */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-red-900 to-black opacity-95"></div>
+            {/* Enhanced Background Gradient with Navy Theme */}
+            <div className="absolute inset-0 bg-[#0B0B45] "></div>
 
             {/* Animated Background Mesh */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-800/20 via-transparent to-red-800/20"
+                className="absolute inset-0 bg-#0B0B45]"
                 animate={{
                     opacity: [0.2, 0.4, 0.2],
                     background: [
-                        'linear-gradient(45deg, rgba(128,0,32,0.1), transparent, rgba(139,0,0,0.1))',
-                        'linear-gradient(45deg, rgba(139,0,0,0.2), transparent, rgba(128,0,32,0.2))',
-                        'linear-gradient(45deg, rgba(128,0,32,0.1), transparent, rgba(139,0,0,0.1))'
+                        'linear-gradient(45deg, rgba(30,58,138,0.1), transparent, rgba(30,64,175,0.1))',
+                        'linear-gradient(45deg, rgba(30,64,175,0.2), transparent, rgba(30,58,138,0.2))',
+                        'linear-gradient(45deg, rgba(30,58,138,0.1), transparent, rgba(30,64,175,0.1))'
                     ]
                 }}
                 transition={{
@@ -38,7 +38,7 @@ const AboutUs = () => {
             {[...Array(8)].map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute w-2 h-2 bg-red-300/20 rounded-full"
+                    className="absolute w-2 h-2 bg-blue-300/20 rounded-full"
                     style={{
                         left: `${10 + i * 12}%`,
                         top: `${20 + i * 8}%`,
@@ -67,14 +67,14 @@ const AboutUs = () => {
                 >
                     <div className="inline-block">
                         <motion.h2 
-                            className="text-2xl md:text-3xl font-bold text-white tracking-wide"
+                            className="text-2xl md:text-3xl font-black text-white tracking-wide"
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         >
                             ABOUT OUR COMPANY
                         </motion.h2>
                         <motion.div 
-                            className="h-1 w-24 bg-gradient-to-r from-red-300 to-red-500 rounded-full mx-auto mt-2"
+                            className="h-1 w-24 bg-gradient-to-r from-blue-300 to-blue-500 rounded-full mx-auto mt-2"
                             initial={{ width: 0 }}
                             whileInView={{ width: 96 }}
                             viewport={{ once: false }}
@@ -95,7 +95,7 @@ const AboutUs = () => {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className="relative group"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-400/20 rounded-2xl blur-xl transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/20 rounded-2xl blur-xl transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                             <motion.img
                                 src="foto-1.jpeg"
                                 alt="FES Event Highlight"
@@ -114,7 +114,7 @@ const AboutUs = () => {
                                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                                 className="relative group"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-red-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/15 to-blue-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                                 <motion.img
                                     src="about-1.png"
                                     alt="Event Management"
@@ -131,7 +131,7 @@ const AboutUs = () => {
                                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
                                 className="relative group"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-red-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/15 to-blue-500/15 rounded-xl blur-lg transform scale-105 group-hover:scale-110 transition-transform duration-300"></div>
                                 <motion.img
                                     src="foto-2.jpeg"
                                     alt="Team Collaboration"
@@ -153,10 +153,10 @@ const AboutUs = () => {
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                         className="xl:col-span-5"
                     >
-                        <div className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-red-800/20 hover:border-red-600/40 transition-all duration-300">
+                        <div className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-blue-800/20 hover:border-blue-600/40 transition-all duration-300">
                             <motion.h3 
-                                className="text-xl md:text-2xl font-bold mb-4 text-red-200 border-b border-red-700 pb-3"
-                                whileHover={{ color: "#fecaca" }}
+                                className="text-xl md:text-2xl font-bold mb-4 text-blue-200 border-b border-blue-700 pb-3"
+                                whileHover={{ color: "#bfdbfe" }}
                                 transition={{ duration: 0.3 }}
                             >
                                 Our Story Since 2020
@@ -191,7 +191,7 @@ const AboutUs = () => {
                                 </motion.p>
                             </div>
                             <motion.div 
-                                className="mt-6 p-4 bg-red-900/20 rounded-lg border-l-4 border-red-400"
+                                className="mt-6 p-4 bg-blue-900/20 rounded-lg border-l-4 border-blue-400"
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: false }}
@@ -200,7 +200,7 @@ const AboutUs = () => {
                             >
                                 <div className="text-white text-sm md:text-base">
                                     Lebih dari <motion.span 
-                                        className="text-2xl font-bold text-red-300 ml-1"
+                                        className="text-2xl font-bold text-blue-300 ml-1"
                                         animate={{ scale: [1, 1.1, 1] }}
                                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                                     >
@@ -242,16 +242,16 @@ const AboutUs = () => {
                             whileHover={{ 
                                 scale: 1.05, 
                                 y: -5,
-                                boxShadow: "0px 15px 30px rgba(220, 38, 38, 0.2)" 
+                                boxShadow: "0px 15px 30px rgba(59, 130, 246, 0.2)" 
                             }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-4 md:p-6 rounded-xl border border-red-800/20 hover:border-red-600/50 transition-all duration-300 text-center group"
+                            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-4 md:p-6 rounded-xl border border-blue-800/20 hover:border-blue-600/50 transition-all duration-300 text-center group"
                         >
                             <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
                                 {item.icon}
                             </div>
                             <motion.div 
-                                className="text-2xl md:text-3xl font-bold text-red-300 mb-2"
+                                className="text-2xl md:text-3xl font-bold text-blue-300 mb-2"
                                 animate={{ scale: [1, 1.05, 1] }}
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
                             >
@@ -295,10 +295,10 @@ const AboutUs = () => {
                                 viewport={{ once: false, amount: 0.3 }}
                                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                className="bg-gradient-to-br from-red-900/20 to-red-800/10 backdrop-blur-sm p-6 rounded-xl border border-red-800/20 hover:border-red-600/40 transition-all duration-300"
+                                className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm p-6 rounded-xl border border-blue-800/20 hover:border-blue-600/40 transition-all duration-300"
                             >
                                 <div className="text-3xl mb-4">{feature.icon}</div>
-                                <h4 className="text-lg font-semibold text-red-200 mb-3">{feature.title}</h4>
+                                <h4 className="text-lg font-semibold text-blue-200 mb-3">{feature.title}</h4>
                                 <p className="text-sm text-gray-300 leading-relaxed">{feature.description}</p>
                             </motion.div>
                         ))}
@@ -308,7 +308,7 @@ const AboutUs = () => {
 
             {/* Enhanced ambient lighting effects */}
             <motion.div 
-                className="absolute -bottom-20 left-0 w-80 h-80 bg-gradient-to-tr from-red-600/20 via-red-500/10 to-transparent rounded-full filter blur-3xl"
+                className="absolute -bottom-20 left-0 w-80 h-80 bg-gradient-to-tr from-blue-600/20 via-blue-500/10 to-transparent rounded-full filter blur-3xl"
                 animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.1, 0.3, 0.1],
@@ -321,7 +321,7 @@ const AboutUs = () => {
             />
             
             <motion.div 
-                className="absolute top-20 right-10 w-60 h-60 bg-gradient-to-bl from-red-400/20 via-red-300/10 to-transparent rounded-full filter blur-3xl"
+                className="absolute top-20 right-10 w-60 h-60 bg-gradient-to-bl from-blue-400/20 via-blue-300/10 to-transparent rounded-full filter blur-3xl"
                 animate={{
                     scale: [1, 1.4, 1],
                     opacity: [0.2, 0.4, 0.2],
